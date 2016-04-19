@@ -1,6 +1,7 @@
 'use strict'
 
 var seneca = require('seneca')()
+var config = require('./config')
 var pkg = require('./package.json')
 
 seneca.add({ cmd: 'collect-tasks' }, function (args, callback) {
@@ -14,4 +15,6 @@ seneca.add({ cmd: 'collect-tasks' }, function (args, callback) {
   callback(null, result)
 })
 
-seneca.listen()
+seneca.listen({
+  port: config.SERVICE_PORT
+})
