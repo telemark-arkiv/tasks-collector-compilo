@@ -1,20 +1,35 @@
 'use strict'
 
-var seneca = require('seneca')()
-var config = require('./config')
-var pkg = require('./package.json')
+var Seneca = require('seneca')
+var Mesh = require('seneca-mesh')
+var Compilo = require('./lib/compilo')
+var envs = process.env
 
-seneca.add({ cmd: 'collect-tasks' }, function (args, callback) {
-  var result = {
-    id: pkg.name,
-    version: pkg.version,
-    timestamp: new Date().getTime(),
-    user: args.user,
-    results: []
+var options = {
+  seneca: {
+    tag: envs.TASKS_COLLECTOR_COMPILIO_TAG || 'tasks-collector-compilio'
+  },
+  mesh: {
+    auto: true,
+    listen: [
+      {pin: 'cmd:collect-tasks', model: 'observe'}
+    ]
+  },
+  compilo: {
+    url: envs.TASKS_COLLECTOR_COMPILO_URL || 'http://compilo.no'
+  },
+  isolated: {
+    host: envs.TASKS_COLLECTOR_COMPILIO_HOST || 'localhost',
+    port: envs.TASKS_COLLECTOR_COMPILIO_PORT || '8000'
   }
-  callback(null, result)
-})
+}
+var Service = Seneca(options.seneca)
 
-seneca.listen({
-  port: config.SERVICE_PORT
-})
+if (envs.TASKS_COLLECTOR_COMPILIO_ISOLATED) {
+  Service.listen(options.isolated)
+}
+else {
+  Service.use(Mesh, options.mesh)
+}
+
+Service.use(Compilo, options.compilo)
