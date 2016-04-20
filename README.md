@@ -1,6 +1,14 @@
 # tasks-collector-compilo
 Service for collecting a user's tasks from Compilo
 
+## Inbound messages
+This service listens for the following messages
+
+- ```{cmd: 'collect-tasks'}```
+
+## Outbound messages
+This microservice do not emit any outbound messages
+
 ## Docker
 Build the image
 
