@@ -1,11 +1,11 @@
 ###########################################################
 #
-# Dockerfile for tasks-collector-compilio
+# Dockerfile for tasks-collector-compilo
 #
 ###########################################################
 
-# Setting the base to nodejs 4.4.2
-FROM mhart/alpine-node:4.4.2
+# Setting the base to nodejs 4.4.3
+FROM mhart/alpine-node:4.4.3
 
 # Maintainer
 MAINTAINER Geir Gåsodden
@@ -13,7 +13,10 @@ MAINTAINER Geir Gåsodden
 #### Begin setup ####
 
 # Installs git
-RUN apk add --update git && rm -rf /var/cache/apk/*
+RUN apk add --update --no-cache git
+
+# Extra tools for native dependencies
+RUN apk add --no-cache make gcc g++ python
 
 # Bundle app source
 COPY . /src
@@ -25,10 +28,10 @@ WORKDIR "/src"
 RUN npm install --production
 
 # Env variables
-ENV SERVICE_PORT 3000
-
-# Expose SERVICE_PORT
-EXPOSE 3000
+ENV TASKS_COLLECTOR_COMPILO_TAG tasks-collector-compilo
+ENV TASKS_COLLECTOR_COMPILO_URL http://compilo.no
+ENV TASKS_COLLECTOR_COMPILO_HOST localhost
+ENV TASKS_COLLECTOR_COMPILO_PORT 8000
 
 # Startup
-ENTRYPOINT node service.js
+CMD ["node", "service.js", "--seneca-log=type:act"]
