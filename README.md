@@ -1,9 +1,11 @@
+[![Build Status](https://travis-ci.org/telemark/tasks-collector-compilo.svg?branch=master)](https://travis-ci.org/telemark/tasks-collector-compilo)
+[![Coverage Status](https://coveralls.io/repos/telemark/tasks-collector-compilo/badge.svg?branch=master&service=github)](https://coveralls.io/github/telemark/tasks-collector-compilo?branch=master)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 # tasks-collector-compilo
-Service for collecting a user's tasks from Compilo
+Service for collecting a user's tasks from [Compilo]()
 
 ## Inbound messages
 This microservice listens for the following messages
-
 
 - ```{cmd: 'collect-tasks', type: 'user'}```
 
