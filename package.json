@@ -1,6 +1,6 @@
 {
   "name": "tasks-collector-compilo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Collect a user's tasks from Compilo",
   "license": "MIT",
   "author": {
