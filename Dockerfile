@@ -27,11 +27,5 @@ WORKDIR "/src"
 # Install dependencies
 RUN npm install --production
 
-# Env variables
-ENV TASKS_COLLECTOR_COMPILO_TAG tasks-collector-compilo
-ENV TASKS_COLLECTOR_COMPILO_URL http://compilo.no
-ENV TASKS_COLLECTOR_COMPILO_HOST localhost
-ENV TASKS_COLLECTOR_COMPILO_PORT 8000
-
 # Startup
 CMD ["node", "service.js", "--seneca-log=type:act"]
