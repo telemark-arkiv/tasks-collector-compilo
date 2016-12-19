@@ -1,13 +1,16 @@
 'use strict'
 
-var Seneca = require('seneca')
-var Mesh = require('seneca-mesh')
-var Compilo = require('./lib/compilo')
-var envs = process.env
+const legacyLogger = require('seneca-legacy-logger')
+const Seneca = require('seneca')
+const Mesh = require('seneca-mesh')
+const Compilo = require('./lib/compilo')
+const envs = process.env
 
-var options = {
+const options = {
   seneca: {
-    log: 'silent',
+    internal: {
+      logger: legacyLogger
+    },
     tag: envs.TASKS_COLLECTOR_COMPILO_TAG || 'tasks-collector-compilo'
   },
   mesh: {
@@ -25,7 +28,7 @@ var options = {
   }
 }
 
-var Service = Seneca(options.seneca)
+const Service = Seneca(options.seneca)
 
 if (envs.TASKS_COLLECTOR_COMPILO_ISOLATED) {
   Service.listen(options.isolated)
