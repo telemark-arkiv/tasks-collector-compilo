@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/telemark/tasks-collector-compilo.svg?branch=master)](https://travis-ci.org/telemark/tasks-collector-compilo)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 # tasks-collector-compilo
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/telemark/tasks-collector-compilo.svg)](https://greenkeeper.io/)
 Service for collecting a user's tasks from Compilo
 
 ## Inbound messages
